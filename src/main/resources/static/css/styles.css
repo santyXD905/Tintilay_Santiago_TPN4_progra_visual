@@ -1,0 +1,24 @@
+.footer{
+		
+	background:  teal;
+	padding: 8px 16px 8px 16px;
+	height: 50px;
+	text-align: center;
+}
+
+.login-box {
+  width: 320px;
+  height: 550px;
+  padding: 200px 50px;
+}
+
+.fondo{
+	background-image: url("../img/fondo.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+.fondolongin {
+	background:  teal;
+}
