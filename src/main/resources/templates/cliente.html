@@ -19,6 +19,7 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 	<div class="boty">
 		
 		<h1>Formulario de Carga de Cliente</h1>
+		<br>
 		
 		<form id="formProducto" th:object="${unCliente}" th:action="@{/cliente/guardar}" method="post">
 		
@@ -91,7 +92,7 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 		<br>
 		<h3>Lista de Clientes</h3>
 		<br>
-		<div>
+		<div class="container">
 			<table border=1 style="border-collapse: collapse" class="table table-dark">
 				<tr>
 					<th>tipo Doc</th>

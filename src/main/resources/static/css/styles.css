@@ -7,7 +7,7 @@
 }
 
 .login-box {
-  width: 320px;
+  width: 300px;
   padding: 200px 50px;
 }
 
@@ -19,9 +19,8 @@
 }
 
 .boty {
-	margin: 0;
 	padding: 0;
-	
-	min-height: 100vh;
+	margin: 20px;
+	min-height: 80vh;
 	flex-wrap: wrap;
 }
