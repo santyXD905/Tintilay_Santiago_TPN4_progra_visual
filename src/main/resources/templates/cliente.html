@@ -16,18 +16,16 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 
 	<div th:insert="layout/header :: header"></div>
 
-	<div class="login-box">
+	<div class="boty">
 		
-     
 		<h1>Formulario de Carga de Cliente</h1>
+		
 		<form id="formProducto" th:object="${unCliente}" th:action="@{/cliente/guardar}" method="post">
-			<!--viene un objeto "un cliente" //con el arroba se puede cambiar de nombre-->
-			<!--heredan sus atributos-->
-			
+		
 			<div class="form-group row">
 			<label for="tipdoc"  class="col-sm-2 col-form-label" >Tipo de Documento</label> 
-			<div class="col-sm-3">
-			<select id="tipdoc" th:field="*{tipoDocumento}"  class="form-control"><!--${unCliente/nroDocumento}-->
+			<div class="col-sm-2">
+			<select id="tipdoc" th:field="*{tipoDocumento}"  class="form-control">
 				<option value="DNI">DNI</option>
 				<option value="Pasaporte">Pasaporte</option>
 			</select> 
@@ -90,7 +88,7 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 		</form>
 
 		<!-- ---------------------------------------------------------------- -->
-
+		<br>
 		<h3>Lista de Clientes</h3>
 		<br>
 		<div>
@@ -107,26 +105,31 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 					<th>datos adicionales</th>
 					
 				</tr>
+				
+				<tr th:if="${clientes.empty}">
+					<td colspan="9" class="text-center">No hay clientes registrados</td>
+			
+				
 				<tr th:each="cli : ${clientes}">
 					<td th:text="${cli.tipoDocumento}"></td>
 					<td th:text="${cli.nroDocumento}"></td>
 					<td th:text="${cli.nomyApe.toUpperCase()}"></td>
-					<td
-						th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"></td>
-					<!--formatea la fecha para poder mostrar-->
+					<td th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"></td>
 					<td th:text="${cli.getEdad()}"></td>
 					<td th:text="|${cli.codigoAreaTelefono} - ${cli.numTelefono}|"></td>
 					<td th:text="${cli.email}"></td>
-					<td
-						th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"></td>
+					<td th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"></td>
 					<td th:text="|${cli.getTiempoDesdeUltimaCompra()} - ${cli.getTiempoHastaCumple()}|"></td>
 					
 				</tr>
 			</table>
 		</div>
+		
 
 	</div>
 
+	<div th:insert="layout/footer :: footer"></div>
+	
 		<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
 			type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
 		<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
@@ -135,7 +138,7 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 			type="text/javascript"
 			src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 			
-		<div th:insert="layout/footer :: footer"></div>
+	
 
 	
 </body>
