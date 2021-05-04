@@ -45,6 +45,6 @@ public class ProductoController {
 	@GetMapping("/volver")
 	public String cargarNuevoProducto(Model model) {
 		//model.addAttribute("unProducto", iProductoService.obtenerProductoNuevo());
-		return("redirect:/producto");
+		return("redirect:/producto/mostrar");
 	}
 }

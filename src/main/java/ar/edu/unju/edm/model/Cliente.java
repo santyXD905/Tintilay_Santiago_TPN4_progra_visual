@@ -246,7 +246,7 @@ public class Cliente {
 		
 		Period periodo =  Period.between(fechaAct, fechaNacimiento);
 		
-		return periodo.getYears();
+		return periodo.getYears()*-1;
 	}
 	
 	public String getTiempoDesdeUltimaCompra() {

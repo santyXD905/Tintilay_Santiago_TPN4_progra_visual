@@ -11,16 +11,17 @@
 	<title>Producto</title>
 </head>
 
-<body>
+<body class="fondo2">
 
   <div th:insert="layout/header :: header"></div>
   
-  <div class="boty">	
+  <div class="body2">	
 	<h1>Formulario de Carga de Producto</h1>
 	<br>
 	
 	<form id="formProducto" th:object="${unProducto}" th:action="${producto}" method="post">
 		
+	<div class="text-white">
 		<div class="form-group row">
 		<label for="codigo" class="col-sm-1 col-form-label">Codigo</label>
 		<div class="col-auto">
@@ -59,7 +60,7 @@
 		<div>
 			<button type="submit" value="Agregar">Agregar</button>
 		</div>
-
+    </div>
 	</form>
    </div>
    

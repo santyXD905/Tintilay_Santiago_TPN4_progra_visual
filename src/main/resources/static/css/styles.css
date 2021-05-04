@@ -18,9 +18,30 @@
 	background-position: center;
 }
 
-.boty {
+.fondo3{
+	background-image: url("../img/fondo3.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
+}
+
+.body2 {
 	padding: 0;
 	margin: 20px;
 	min-height: 80vh;
 	flex-wrap: wrap;
+}
+
+.atriPrincipal{
+	
+	position: sticky;
+	left: 0;
+	background:  #007bff;
+}
+
+.fondo2{
+	background-image: url("../img/fondo2.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+	background-position: center;
 }

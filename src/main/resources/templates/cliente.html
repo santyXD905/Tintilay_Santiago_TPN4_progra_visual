@@ -12,16 +12,24 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 <title>Cliente</title>
 </head>
 
-<body>
+<body class="fondo2">
 
 	<div th:insert="layout/header :: header"></div>
-
-	<div class="boty">
+	
+	<div class="body2">
+	
 		
 		<h1>Formulario de Carga de Cliente</h1>
 		<br>
 		
-		<form id="formProducto" th:object="${unCliente}" th:action="@{/cliente/guardar}" method="post">
+		<form id="formProducto" th:object="${unCliente}" th:action="${editMode}?@{/cliente/modificar}:@{/cliente/guardar}" method="post">
+		<div class="text-white">
+		    <div class="form-group row">
+			<label for="numdoc"  class="col-sm-2 col-form-label" >Documento</label> 
+			<div class="col-auto">
+			<input type="number" id="numdoc" th:field="*{nroDocumento}"> 
+			</div>
+			</div>
 		
 			<div class="form-group row">
 			<label for="tipdoc"  class="col-sm-2 col-form-label" >Tipo de Documento</label> 
@@ -30,13 +38,6 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 				<option value="DNI">DNI</option>
 				<option value="Pasaporte">Pasaporte</option>
 			</select> 
-			</div>
-			</div>
-			
-			<div class="form-group row">
-			<label for="numdoc"  class="col-sm-2 col-form-label" >Documento</label> 
-			<div class="col-auto">
-			<input type="number" id="numdoc" th:field="*{nroDocumento}"> 
 			</div>
 			</div>
 			 
@@ -50,7 +51,7 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 			<div class="form-group row" >
 			<label for="fechanac" class="col-sm-2 col-form-label">Nacimiento</label> 
 			<div class="col-auto"> 
-			<input type="date" id="fechanac" th:field="*{fechaNacimiento}"> 
+			<input type="date" id="fechanac" th:field="*{fechaNacimiento}" required> 
 			</div>
 			</div>
 			 
@@ -78,25 +79,26 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 			<div class="form-group row" >
 			<label for="ultcompra" class="col-sm-2 col-form-label">ultima compra</label> 
 			<div class="col-auto">
-			<input type="date" id="ultcompra" th:field="*{fechaUltimaCompra}"> 
+			<input type="date" id="ultcompra" th:field="*{fechaUltimaCompra}" required> 
 			</div>
 			</div>
 			
 			<div>
-				<button type="submit" value="Agregar">Agregar</button>
+				<input type="submit" class="btn btn-success btn-block"  
+				th:value="${editMode}?'Modificar Cliente':'Crear Cliente'">
 			</div>
-
+			</div>
 		</form>
 
 		<!-- ---------------------------------------------------------------- -->
 		<br>
 		<h3>Lista de Clientes</h3>
 		<br>
-		<div class="container">
+		<div class="table-responsive">
 			<table border=1 style="border-collapse: collapse" class="table table-dark">
 				<tr>
-					<th>tipo Doc</th>
-					<th>Num Doc</th>
+					<th class="atriPrincipal">Num Documento</th>
+					<th>tipo Documento</th>
 					<th>Apellido y nombre</th>
 					<th>Fecha</th>
 					<th>edad</th>
@@ -104,16 +106,17 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 					<th>Email</th>
 					<th>ultima compra</th>
 					<th>datos adicionales</th>
+					<th>Edicion</th>
 					
 				</tr>
 				
 				<tr th:if="${clientes.empty}">
-					<td colspan="9" class="text-center">No hay clientes registrados</td>
-			
+					<td colspan="10" class="text-center">No hay clientes registrados</td>
+				</tr>
 				
 				<tr th:each="cli : ${clientes}">
+					<td class="atriPrincipal" th:text="${cli.nroDocumento}"></td>
 					<td th:text="${cli.tipoDocumento}"></td>
-					<td th:text="${cli.nroDocumento}"></td>
 					<td th:text="${cli.nomyApe.toUpperCase()}"></td>
 					<td th:text="${#temporals.format(cli.fechaNacimiento,'dd/MM/yyyy')}"></td>
 					<td th:text="${cli.getEdad()}"></td>
@@ -121,13 +124,15 @@ th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
 					<td th:text="${cli.email}"></td>
 					<td th:text="${#temporals.format(cli.fechaUltimaCompra,'dd/MM/yyyy')}"></td>
 					<td th:text="|${cli.getTiempoDesdeUltimaCompra()} - ${cli.getTiempoHastaCumple()}|"></td>
-					
+					<td><a href="#" th:href="@{'/cliente/editar/'+${cli.nroDocumento}}">
+									<i class="fa fa-edit"></i></a>
 				</tr>
 			</table>
 		</div>
 		
 
 	</div>
+
 
 	<div th:insert="layout/footer :: footer"></div>
 	
