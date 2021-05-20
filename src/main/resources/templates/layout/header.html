@@ -1,5 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<link th:rel="stylesheet" type="text/css"	th:href="@{/css/styles.css}" />
+<link th:rel="stylesheet" type="text/css"	
+th:href="@{/webjars/bootstrap/4.5.0/css/bootstrap.min.css}">
+<link th:rel="stylesheet"	
+th:href="@{/webjars/font-awesome/5.11.2/css/all.css}" />
+<meta charset="UTF-8">
+
+<title>header</title>
+
+</head>
+
 <body>
 	<div id="header" th:fragment="header">
 	
@@ -16,11 +29,30 @@
       <li class="nav-item">
         <a class="nav-link" href="/cliente/mostrar">Clientes</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="/producto/mostrar">Productos</a>
-      </li>
+      
+           <li class="nav-item dropdown active">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Productos
+                        </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" th:href="@{/producto/tabla}">Lista de Productos</a>
+                                <a class="dropdown-item" th:href="@{/producto/mostrar}">Cargar Productos</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" th:href="@{/producto/ventas}">Catalogo</a>
+                            </div>
+                        </li>
+        
     </ul>
   </div>
 </nav>
 	</div>
+	
+		
+		<script th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"
+			type="text/javascript" src="webjars/jquery/3.5.1/jquery.min.js"></script>
+		<script th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"
+			type="text/javascript" src="webjars/popper.js/1.16.0/popper.min.js"></script>
+		<script th:src="@{/webjars/bootstrap/4.5.0/js/bootstrap.min.js}"
+			type="text/javascript"
+			    src="webjars/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </body>

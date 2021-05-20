@@ -5,27 +5,49 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+@Entity //transforma en entidad 
+@Table (name="CLIENTES")
 @Component
 public class Cliente {
 	
-	@DateTimeFormat(pattern = "yyyy-MM-dd")//formato de fecha para local date
-	private LocalDate fechaNacimiento, fechaUltimaCompra;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	
-	//Calendar
-	//private Date fechaUltimCompra = new Date();
-	
-	private String nomyApe;
-	private String tipoDocumento;
+	@Column
+	private Integer IDcliente;
+
+	@Column
 	private int nroDocumento;
+	@Column
+	private String nomyApe;
+	@Column
+	private String tipoDocumento;
+	@Column
 	private int codigoAreaTelefono;
+	@Column
 	private int numTelefono;
+	@Column
 	private String email;
+	@Column
 	private String passwd;
+	@Column
 	private String otrosDatos;
-	
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaNacimiento;
+	@Column
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private LocalDate fechaUltimaCompra;
 	
 	public Cliente() {
 		// TODO Auto-generated constructor stub
@@ -153,6 +175,16 @@ public class Cliente {
 		this.otrosDatos = otrosDatos;
 	}
 
+	public Integer getIDcliente() {
+		return IDcliente;
+	}
+
+
+
+
+	public void setIDcliente(Integer iDcliente) {
+		IDcliente = iDcliente;
+	}
 
 
 

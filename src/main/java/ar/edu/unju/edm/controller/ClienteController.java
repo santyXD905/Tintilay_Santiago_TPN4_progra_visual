@@ -17,7 +17,7 @@ import ar.edu.unju.edm.service.IClienteService;
 public class ClienteController {
 	
 	@Autowired
-	@Qualifier("unImp")
+	@Qualifier("otraIMP")
 	IClienteService clienteService;
 	
 	@GetMapping("/cliente/mostrar")
