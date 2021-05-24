@@ -11,8 +11,8 @@ public interface IClienteService {
 	public void guardarCliente(Cliente unCliente);
 	public Cliente crearCliente();
 	public List<Cliente> obtenerTodosClientes();
-	public Cliente encontrarUnCliente(int dni);
-	public void modificarCliente(Cliente clienteModificado);
-	public void eliminarCliente(int id);
+	public Cliente encontrarUnCliente(Integer idcliente) throws Exception;
+	public void modificarCliente(Cliente clienteModificado) throws Exception;
+	public void eliminarCliente(int id) throws Exception;
 
 }

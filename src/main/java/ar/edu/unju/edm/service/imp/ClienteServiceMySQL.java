@@ -1,6 +1,7 @@
 package ar.edu.unju.edm.service.imp;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -39,21 +40,38 @@ public class ClienteServiceMySQL implements IClienteService {
 	}
 
 	@Override
-	public Cliente encontrarUnCliente(int dni) {
+	public Cliente encontrarUnCliente(Integer idcliente) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return clienteDAO.findById(idcliente).orElseThrow(()->new Exception("El cliente NO existe"));
 	}
 
+	private void cambiarCliente(Cliente desde, Cliente hacia) {
+		//observen que vamos a pasar todos los atributos del cliente que viene, hacia el cliente que ya está en la BD
+		hacia.setNroDocumento(desde.getNroDocumento());
+		hacia.setNomyApe(desde.getNomyApe());
+		hacia.setTipoDocumento(desde.getTipoDocumento());
+		hacia.setFechaNacimiento(desde.getFechaNacimiento());
+		hacia.setCodigoAreaTelefono(desde.getCodigoAreaTelefono());
+		hacia.setNumTelefono(desde.getNumTelefono());
+		hacia.setEmail(desde.getEmail());
+	}
 	@Override
-	public void modificarCliente(Cliente clienteModificado) {
+	public void modificarCliente(Cliente clienteModificado) throws Exception {
+		
 		// TODO Auto-generated method stub
+		Cliente clienteAModificar = clienteDAO.findById(clienteModificado.getIDcliente()).orElseThrow(()->new Exception("El Cliente no fue encontrado"));
+		cambiarCliente(clienteModificado, clienteAModificar);
+		clienteDAO.save(clienteAModificar);
 		
 	}
+	
+	
 
 	@Override
-	public void eliminarCliente(int id) {
+	public void eliminarCliente(int dni)  throws Exception{
 		// TODO Auto-generated method stub
-		
+		Cliente clienteEliminar = clienteDAO.findByNroDocumento(dni).orElseThrow(()->new Exception("El Cliente no fue encontrado"));
+		clienteDAO.delete(clienteEliminar);
 	}
 
 }

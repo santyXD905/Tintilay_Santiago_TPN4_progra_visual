@@ -11,6 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -27,8 +31,11 @@ public class Cliente {
 	private Integer IDcliente;
 
 	@Column
+	@Min(100000)
+	@Max(9999999)
 	private int nroDocumento;
 	@Column
+	@NotBlank(message="Debe incluir nombre completo")
 	private String nomyApe;
 	@Column
 	private String tipoDocumento;
@@ -175,6 +182,14 @@ public class Cliente {
 		this.otrosDatos = otrosDatos;
 	}
 
+
+
+
+
+	
+
+
+
 	public Integer getIDcliente() {
 		return IDcliente;
 	}
@@ -185,6 +200,7 @@ public class Cliente {
 	public void setIDcliente(Integer iDcliente) {
 		IDcliente = iDcliente;
 	}
+
 
 
 

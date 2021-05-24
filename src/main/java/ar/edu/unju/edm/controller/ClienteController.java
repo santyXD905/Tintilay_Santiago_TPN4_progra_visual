@@ -1,10 +1,13 @@
 package ar.edu.unju.edm.controller;
 
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,15 +31,23 @@ public class ClienteController {
 	}
 
 	@PostMapping("/cliente/guardar")
-	public String guardarNuevoProducto(@ModelAttribute("unCliente") Cliente nuevoCliente, Model model) {
-		clienteService.guardarCliente(nuevoCliente);		
-		return "redirect:/cliente/mostrar";//lo devuelve a la linea 22
+	public String guardarNuevoProducto(@Valid @ModelAttribute("unCliente") Cliente nuevoCliente,BindingResult resultado, Model model) {
+	if(resultado.hasErrors()) {
+		model.addAttribute("unCliente", nuevoCliente);
+		model.addAttribute("clientes", clienteService.obtenerTodosClientes());
+		return("cliente");
+	}
+	else {
+		clienteService.guardarCliente(nuevoCliente);
+		return "redirect:/cliente/mostrar";
+	}
+		
 	}
 	
-	@GetMapping("/cliente/editar/{nroDocumento}")
-	public String editarCliente(Model model, @PathVariable(name="nroDocumento") int dni) throws Exception { //pathvariable trae un elemento desde la vista
+	@GetMapping("/cliente/editar/{IDcliente}")
+	public String editarCliente(Model model, @PathVariable(name="IDcliente") Integer id) throws Exception { //pathvariable trae un elemento desde la vista
 		try {
-			Cliente clienteEncontrado = clienteService.encontrarUnCliente(dni);
+			Cliente clienteEncontrado = clienteService.encontrarUnCliente(id);
 			model.addAttribute("unCliente", clienteEncontrado);	
 			model.addAttribute("editMode", "true");
 		}
@@ -52,10 +63,13 @@ public class ClienteController {
 	
 	@PostMapping("/cliente/modificar")
 	public String modificarCliente(@ModelAttribute("unCliente") Cliente clienteModificado, Model model) {
+
 		try {
+			
 			clienteService.modificarCliente(clienteModificado);
-			model.addAttribute("unCliente", new Cliente());				
+			model.addAttribute("unCliente", new Cliente());		
 			model.addAttribute("editMode", "false");
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			// pasar las excepciones al html

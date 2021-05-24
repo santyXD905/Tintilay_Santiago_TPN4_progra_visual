@@ -39,9 +39,9 @@ public class ClienteServiceImp implements IClienteService{
 	}
 
 	@Override
-	public Cliente encontrarUnCliente(int dni) {
+	public Cliente encontrarUnCliente(Integer id) {
 		for (int i = 0; i  < listadoClientes.size() ; i++) {
-			if ( listadoClientes.get(i).getNroDocumento() == dni) {
+			if ( listadoClientes.get(i).getIDcliente() == id) {
 				return listadoClientes.get(i);
 			}
 		}
